@@ -1,4 +1,13 @@
-import { nanoid } from 'nanoid';
+import { randomBytes } from 'crypto';
+
+const PROCESS_ID = randomBytes(4);
+
+function generateId() {
+  return Buffer.concat([
+    PROCESS_ID,
+    randomBytes(6),
+  ]).toString('base64url');
+}
 
 export default class AsyncGroup {
   private promises: Map<string, Promise<unknown>> = new Map();
@@ -6,7 +15,7 @@ export default class AsyncGroup {
   private static instance: AsyncGroup | null = null;
 
   public async add<T = unknown>(promise: Promise<T>): Promise<T> {
-    const id = nanoid();
+    const id = generateId();
 
     this.promises.set(
       id,

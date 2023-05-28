@@ -35,8 +35,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "dependencies": {
-    "nanoid": "4.0.2"
   }
 }
